@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/RotaCervejeira/static/css/main.444ce3f8.chunk.css",
+    "main.js": "/RotaCervejeira/static/js/main.b18aea4e.chunk.js",
+    "main.js.map": "/RotaCervejeira/static/js/main.b18aea4e.chunk.js.map",
+    "runtime-main.js": "/RotaCervejeira/static/js/runtime-main.97ab544d.js",
+    "runtime-main.js.map": "/RotaCervejeira/static/js/runtime-main.97ab544d.js.map",
+    "static/css/2.61b4cb56.chunk.css": "/RotaCervejeira/static/css/2.61b4cb56.chunk.css",
+    "static/js/2.5d6f337d.chunk.js": "/RotaCervejeira/static/js/2.5d6f337d.chunk.js",
+    "static/js/2.5d6f337d.chunk.js.map": "/RotaCervejeira/static/js/2.5d6f337d.chunk.js.map",
+    "index.html": "/RotaCervejeira/index.html",
+    "static/css/2.61b4cb56.chunk.css.map": "/RotaCervejeira/static/css/2.61b4cb56.chunk.css.map",
+    "static/css/main.444ce3f8.chunk.css.map": "/RotaCervejeira/static/css/main.444ce3f8.chunk.css.map",
+    "static/js/2.5d6f337d.chunk.js.LICENSE.txt": "/RotaCervejeira/static/js/2.5d6f337d.chunk.js.LICENSE.txt",
+    "static/media/logo.1a26ce34.png": "/RotaCervejeira/static/media/logo.1a26ce34.png",
+    "static/media/style.css": "/RotaCervejeira/static/media/parallax.7e68d2a3.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.97ab544d.js",
+    "static/css/2.61b4cb56.chunk.css",
+    "static/js/2.5d6f337d.chunk.js",
+    "static/css/main.444ce3f8.chunk.css",
+    "static/js/main.b18aea4e.chunk.js"
+  ]
+}
