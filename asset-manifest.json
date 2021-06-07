@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/RotaCervejeira/static/css/main.444ce3f8.chunk.css",
-    "main.js": "/RotaCervejeira/static/js/main.b18aea4e.chunk.js",
-    "main.js.map": "/RotaCervejeira/static/js/main.b18aea4e.chunk.js.map",
+    "main.js": "/RotaCervejeira/static/js/main.f5511464.chunk.js",
+    "main.js.map": "/RotaCervejeira/static/js/main.f5511464.chunk.js.map",
     "runtime-main.js": "/RotaCervejeira/static/js/runtime-main.97ab544d.js",
     "runtime-main.js.map": "/RotaCervejeira/static/js/runtime-main.97ab544d.js.map",
     "static/css/2.61b4cb56.chunk.css": "/RotaCervejeira/static/css/2.61b4cb56.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.61b4cb56.chunk.css",
     "static/js/2.5d6f337d.chunk.js",
     "static/css/main.444ce3f8.chunk.css",
-    "static/js/main.b18aea4e.chunk.js"
+    "static/js/main.f5511464.chunk.js"
   ]
 }
