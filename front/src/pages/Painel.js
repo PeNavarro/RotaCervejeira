@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-import Container from 'react-bootstrap/Container'
 import Logo from '../images/logo.png'
-import Parallax from '../images/parallax.jpg'
-import Row from 'react-bootstrap/Row'
-import Card from 'react-bootstrap/Card'
 import '../css/style.css'
-import { Col, Jumbotron, Button, Table, Form, Modal, Spinner } from 'react-bootstrap'
+import {Row, Toast, Container, Nav, Navbar, Button, Table, Form, Modal, Spinner } from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import {FaPencilAlt, FaTrashAlt, FaPlus, FaThList, FaRegSave} from "react-icons/fa";
 import { BACKEND } from '../constants'
@@ -19,7 +13,7 @@ function Painel(){
     document.title = 'Painel Rota Cervejeira'
   }, [])
 
-  const valorInicial = { nome: '', descricao: '', funcionamento: '', acessibilidade: 'false', status: 'true'}
+  const valorInicial = { nome: '', descricao: '', localizacao: '', funcionamento: '', acessibilidade: 'false', status: 'true'}
 
   var statusValidado
 
@@ -31,10 +25,11 @@ function Painel(){
   const [dadosCervejaria, setDadosCervejarias] = useState(valorInicial)
   const [cervejarias, setCervejarias] = useState([])
   const [aviso, setAviso] = useState('')
+  const [toastAviso, setToastAviso] = useState(false)
   const [erros, setErros] = useState({})
   const [confirmaExclusao, setConfirmaExclusao] = useState(false)
 
-  const { nome, descricao, funcionamento, acessibilidade, status } = dadosCervejaria
+  const { nome, descricao, localizacao, funcionamento, acessibilidade, status } = dadosCervejaria
 
   async function listaCervejarias(){
     setCarregandoCervejarias(true)
@@ -73,6 +68,7 @@ function Painel(){
             .then(data => {
                 (data._id || data.message) ? setAviso('Registro salvo com sucesso') : setAviso('')
                 setDadosCervejarias(valorInicial)
+                console.log(JSON.stringify(dadosCervejaria))
                 listaCervejarias()
             }).catch(function (error) {
                 console.error(`Erro ao salvar a cervejaria: ${error.message}`)
@@ -80,6 +76,7 @@ function Painel(){
         setSalvandoCervejarias(false)
         setFormInserir(false)
     }
+    setToastAviso(true)
   }
 
   async function excluirCervejaria() {
@@ -99,6 +96,8 @@ function Painel(){
         .catch(function (error) {
             console.error(`Erro ao excluir a cervejaria: ${error.message}`)
         })
+
+    setToastAviso(true)
 }
 
   const validaErrosCervejaria = () => {
@@ -107,6 +106,10 @@ function Painel(){
     else if (nome.length > 30) novosErros.nome = 'O nome informado é muito longo'
     else if (nome.length < 3) novosErros.nome = 'O nome informado é muito curto'
 
+    if (!localizacao || localizacao === '') novosErros.localizacao = 'A localização não pode ser vazia'
+    else if (localizacao.length > 100) novosErros.localizacao = 'A localização informada é muito longa'
+    else if (localizacao.length < 3) novosErros.localizacao = 'A localização informada é muito curta'
+
     if (!descricao || descricao === '') novosErros.descricao = 'A descrição não pode ser vazia'
     else if (descricao.length > 200) novosErros.descricao = 'A descrição informado é muito longa'
     else if (descricao.length < 3) novosErros.descricao = 'A descrição informado é muito curta'
@@ -114,6 +117,7 @@ function Painel(){
     if (!funcionamento || funcionamento === '') novosErros.funcionamento = 'O funcionamento não pode ser vazio'
     else if (funcionamento.length > 100) novosErros.funcionamento = 'O funcionamento informado é muito longo'
     else if (funcionamento.length < 3) novosErros.funcionamento = 'O funcionamento informado é muito curto'
+
     return novosErros
   }
 
@@ -130,16 +134,20 @@ function Painel(){
     <>
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand className="navbarBrand" href="#home">
-            <img
-              src={Logo}
-              width="50"
-              height="50"
-              className="d-inline-block align-top"
-              alt="logo"
-            />
-            <h1 className="logo">Rota Cervejeira</h1>
-          </Navbar.Brand>
+        <Nav.Link>
+          <Link className="navLink" to="/">    
+            <Navbar.Brand className="navbarBrand">
+              <img
+                src={Logo}
+                width="50"
+                height="50"
+                className="d-inline-block align-top"
+                alt="logo"
+              />
+              <h1 className="logo">Rota Cervejeira</h1>
+            </Navbar.Brand>
+          </Link>
+        </Nav.Link>
           <Nav>
             <Nav.Link>
                 <Link className="navLink" to="/">Home</Link>
@@ -196,6 +204,20 @@ function Painel(){
                   </Form.Group>
 
                   <Form.Group className="mb-3">
+                    <Form.Label>Localização</Form.Label>
+                    <Form.Control type="text" 
+                    placeholder="Localização" 
+                    name="localizacao"
+                    onChange={alteraDadosCervejaria}
+                    value={localizacao} 
+                    isInvalid={!!erros.localizacao}
+                    required/>
+                    <Form.Control.Feedback type='invalid'>
+                        {erros.localizacao}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+
+                  <Form.Group className="mb-3">
                     <Form.Label>Funcionamento</Form.Label>
                     <Form.Control type="text" 
                     placeholder="Funcionamento"
@@ -212,11 +234,6 @@ function Painel(){
                   <Form.Group className="mb-3">
                     <Form.Label>Acessibilidade</Form.Label>
                     <Form.Check type="checkbox" label="Sim" name="acessibilidade" onChange={(e) => setDadosCervejarias({ ...dadosCervejaria, [e.target.name]: e.target.checked })} checked={acessibilidade} />
-                  </Form.Group>
-
-                  <Form.Group controlId="formFile" className="mb-3">
-                    <Form.Label>Foto da cervejaria</Form.Label> <br/>
-                    <Form.Control type="file" name="foto" onChange={alteraDadosCervejaria}/>
                   </Form.Group>
 
                   <Form.Group className="mb-3">
@@ -250,6 +267,16 @@ function Painel(){
             <Button variant="secondary" onClick={()=>{setModalExcluir(false);setConfirmaExclusao(!confirmaExclusao);excluirCervejaria()}}>Sim</Button>
           </Modal.Footer>
         </Modal.Dialog>
+      }
+
+      {toastAviso &&
+        <Toast className="toast">
+          <header>
+            <strong className="mr-auto">Aviso</strong>
+            <button type="button" class="close ml-2 mb-1" data-dismiss="toast" onClick={() => setToastAviso(false)}><span aria-hidden="true">X</span></button>
+          </header>
+          <Toast.Body>{aviso}</Toast.Body>
+      </Toast>
       }
 
       {carregandoCervejarias &&

@@ -4,7 +4,6 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Container from 'react-bootstrap/Container'
 import Logo from '../images/logo.png'
-import Parallax from '../images/parallax.jpg'
 import Row from 'react-bootstrap/Row'
 import Card from 'react-bootstrap/Card'
 import '../css/style.css'
@@ -38,16 +37,20 @@ function Home(){
     <>
       <Navbar bg="dark" variant="dark" fixed="top">
         <Container>
-          <Navbar.Brand className="navbarBrand" href="#home">
-            <img
-              src={Logo}
-              width="50"
-              height="50"
-              className="d-inline-block align-top"
-              alt="logo"
-            />
-            <h1 className="logo">Rota Cervejeira</h1>
-          </Navbar.Brand>
+        <Nav.Link>
+          <Link className="navLink" to="/">    
+            <Navbar.Brand className="navbarBrand">
+              <img
+                src={Logo}
+                width="50"
+                height="50"
+                className="d-inline-block align-top"
+                alt="logo"
+              />
+              <h1 className="logo">Rota Cervejeira</h1>
+            </Navbar.Brand>
+          </Link>
+        </Nav.Link>
           <Nav>
             <Nav.Link>
                 <Link className="navLink" to="/painel">Painel</Link>
@@ -75,10 +78,12 @@ function Home(){
                 cervejarias.filter(item => item.status === true).map(item => (
                   <Col>
                     <Card>
-                      <Card.Img variant="top" src={Parallax} />
                       <Card.Body>
-                        <Card.Title>{item.nome}</Card.Title>
+                        <Card.Title><b>{item.nome}</b></Card.Title>
                         <Card.Text>
+                          Localização: {item.localizacao}
+                          <br />
+                          <br />
                           {item.descricao}
                         </Card.Text>
                       </Card.Body>

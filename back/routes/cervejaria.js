@@ -7,7 +7,8 @@ const validarCervejaria = [
     check('nome', 'Nome da categoria é um campo obrigatório').not().isEmpty(),
     check('status', 'Informe um status válido para a categoria').isIn([true, false]),
     check('descricao', 'A descrição sobre a cervejaria é obrigatória').not().isEmpty(),
-    check('acessibilidade', 'O campo de acessibilidade é obrigatório').not().isEmpty()
+    check('acessibilidade', 'O campo de acessibilidade é obrigatório').not().isEmpty(),
+    check('localizacao', 'O campo de localizacao é obrigatório').not().isEmpty()
 ]
 
 

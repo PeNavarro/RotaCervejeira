@@ -5,12 +5,7 @@ const cervejariaSchema = mongoose.Schema({
     descricao: {type: String},
     funcionamento: {type: String},
     acessibilidade: {type: Boolean},
-    foto: {
-        originalName: {type: String},
-        path: {type: String},
-        size: {type: Number},
-        mimetype: {type: String}
-    },
+    localizacao: {type: String},
     status: {type: Boolean, default: true}
 }, {timestamps:true})
 

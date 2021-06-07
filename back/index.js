@@ -4,7 +4,6 @@ const startMongoServer = require('./config/db')
 startMongoServer()
 
 const rotasCervejarias = require('./routes/cervejaria')
-const rotasUpload = require('./routes/uploads')
 
 const app = express()
 
@@ -29,7 +28,6 @@ app.get('/', (req, res) => {
 })
 
 app.use('/cervejarias', rotasCervejarias)
-app.use('/upload', rotasUpload)
 
 app.use(function(req, res){
     res.status(404).json({
