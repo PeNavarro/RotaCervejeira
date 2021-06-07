@@ -95,6 +95,8 @@ function Home(){
           </Row>
         </Container>
       </div>
+      { console.log({BACKEND}) }
+      <p>{BACKEND}</p>
       <footer>
         <Container>
           <div className="center footer">
